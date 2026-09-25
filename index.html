@@ -614,7 +614,7 @@ function renderEd(){
       ${isExtra?"":`
       <div class="field"><span class="lb">する日の決め方</span><div class="pickrow">
         <button type="button" class="pick wn" data-emode="days" aria-pressed="${ed.mode!=="due"}">曜日を決める</button>
-        <button type="button" class="pick wn" data-emode="due" aria-pressed="${ed.mode==="due"}">期限だけ決める</button></div></div>
+        <button type="button" class="pick wn" data-emode="due" aria-pressed="${ed.mode==="due"}">期限を決める</button></div></div>
       ${ed.mode==="due"
         ? `<div class="field"><span class="lb">期限（この曜日までにする）</span><div class="pickrow">${[1,2,3,4,5,6,0].map(i=>`<button type="button" class="pick dw" data-due="${i}" aria-pressed="${ed.due===i}">${DOW[i]}</button>`).join("")}</div><p class="note" style="margin:0">週の初めから期限の日まで毎日「今日すること」に表示され、完了すると今週は表示されなくなります。</p></div>`
         : `<div class="field"><span class="lb">する日を選択</span><div class="pickrow">${[1,2,3,4,5,6,0].map(i=>`<button type="button" class="pick dw" data-dw="${i}" aria-pressed="${ed.days.includes(i)}">${DOW[i]}</button>`).join("")}</div></div>`}
