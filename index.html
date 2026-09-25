@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>宿題手帳</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -9,14 +10,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="宿題手帳">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f131c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f5f9">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{
-  color-scheme:light;
+  color-scheme:only light;
   --bg:#f3f5f9; --surface:#ffffff; --surface2:#e9edf4; --ink:#141b2e; --ink2:#586079; --line:#d9dfea;
   --accent:#16213e; --onaccent:#ffffff;
   --c-math:#1f6fd1; --c-jp:#d9363e; --c-sci:#ee8412; --c-soc:#2c9a52; --c-piano:#7b55c9; --c-life:#15939e; --c-other:#6b7389;
@@ -25,17 +25,6 @@
   --stamp:#c8262e; --warn:#c2410c; --warn-bg:#fff1e6;
   --radius:12px;
   font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --bg:#0f131c; --surface:#181d29; --surface2:#222938; --ink:#edf0f7; --ink2:#a0a8bf; --line:#2c3446;
-    --accent:#edf0f7; --onaccent:#0f131c;
-    --c-math:#5b9cf0; --c-jp:#f06a70; --c-sci:#f7a54a; --c-soc:#4fc27a; --c-piano:#a585e6; --c-life:#3cc0cb; --c-other:#9aa2b8;
-    --t-math:#1b2a44; --t-jp:#3a1f24; --t-sci:#3a2a17; --t-soc:#18321f; --t-piano:#2a2240; --t-life:#15313a; --t-other:#262b38;
-    --g-normal:#a0a8bf; --g-test:#fb923c; --g-0:#8b93f5; --g-1:#f472b6; --g-2:#d6a55a; --g-3:#2dd4bf; --g-4:#b794f6;
-    --stamp:#f06a70; --warn:#fb923c; --warn-bg:#3a2415;
-  }
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;overscroll-behavior-y:none}
