@@ -34,7 +34,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:inherit;font-siz
 button{font:inherit;color:inherit;cursor:pointer}
 input,select,textarea{font:inherit;color:var(--ink)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--c-math);outline-offset:2px}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px 110px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px calc(160px + env(safe-area-inset-bottom,0px))}
 .num{font-variant-numeric:tabular-nums}
 
 /* header */
@@ -76,7 +76,7 @@ h2.sec .cnt{font-size:13px;color:var(--ink2);font-weight:700}
 .task .memo{font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
 .task .more{border:0;border-left:1px solid var(--line);background:none;width:44px;flex:none;color:var(--ink2);font-size:18px}
 .due{font-size:12px;font-weight:700;border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:2px;border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
-.due.today{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+.due.today{background:none;border-color:var(--g-0);color:var(--g-0)}
 .due.late{background:none;border-color:var(--c-jp);color:var(--c-jp)}
 .dueonly{font-size:12px;color:var(--ink2);margin-top:4px}
 .xtra{font-size:11px;font-weight:700;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:6px;vertical-align:2px}
@@ -177,6 +177,21 @@ select.gsel{border:1px solid var(--line);background:var(--surface);border-radius
 .setup{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-top:24px}
 .setup h2{margin:0 0 8px;font-size:20px}
 [hidden]{display:none!important}
+.cal{margin-bottom:12px}
+.calh{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.calh b{font-size:16px}
+.navbtn.sm{width:36px;height:36px;font-size:18px}
+.calg{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px}
+.cw{text-align:center;font-size:12px;color:var(--ink2);padding:2px 0 4px}
+.cd{position:relative;border:0;background:none;height:42px;font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink);padding:0}
+.cd.out{opacity:.4}
+.cd.sel{background:var(--surface2)}
+.cd.edge{background:var(--accent);color:var(--onaccent);border-radius:8px}
+.cd.today{font-weight:900}
+.cd.today::after{content:"";position:absolute;left:30%;right:30%;top:5px;height:2px;background:currentColor;border-radius:2px}
+.cd i{position:absolute;left:50%;bottom:5px;width:6px;height:6px;border-radius:50%;transform:translateX(-50%)}
+.calsel{margin:8px 2px 0;font-weight:700;font-size:15px}
+.setcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:4px}
 .banner{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);color:var(--ink);border:1px solid var(--warn);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:12px}
 .banner b{color:var(--warn)}
 .banner .btn{padding:6px 12px;font-size:13px;flex:none}
@@ -218,7 +233,13 @@ function sampleData(){
     ],
     weekGroups:{ [addDays(ws,28)]:"test" },
     tasks:[
-      {id:"s1",subject:"math",name:"計算練習（例）",memo:"1日分",days:WK,groups:[ALWAYS]},
+      {id:"c1",subject:"math",name:"計算①（例）",memo:"",days:[1],groups:[ALWAYS]},
+      {id:"c2",subject:"math",name:"計算②（例）",memo:"",days:[2],groups:[ALWAYS]},
+      {id:"c3",subject:"math",name:"計算③（例）",memo:"",days:[3],groups:[ALWAYS]},
+      {id:"c4",subject:"math",name:"計算④（例）",memo:"",days:[4],groups:[ALWAYS]},
+      {id:"c5",subject:"math",name:"計算⑤（例）",memo:"",days:[5],groups:[ALWAYS]},
+      {id:"c6",subject:"math",name:"計算⑥（例）",memo:"",days:[6],groups:[ALWAYS]},
+      {id:"c7",subject:"math",name:"計算⑦（例）",memo:"",days:[0],groups:[ALWAYS]},
       {id:"s2",subject:"math",name:"基礎問題集（例）",memo:"",days:[1,3,5],groups:["normal"]},
       {id:"s3",subject:"math",name:"演習テキスト（例）",memo:"授業の単元",days:[2,4],groups:["normal"]},
       {id:"s4",subject:"jp",name:"漢字練習（例）",memo:"1回分",days:[1,2,4,5],groups:["normal","gwinter"]},
@@ -226,20 +247,24 @@ function sampleData(){
       {id:"s6",subject:"sci",name:"理科まとめ問題（例）",memo:"",days:[2,5],groups:["normal"]},
       {id:"s7",subject:"soc",name:"社会まとめ問題（例）",memo:"",days:[3,6],groups:["normal"]},
       {id:"s16",subject:"sci",name:"理科 確認テスト直し（例）",memo:"曜日は自由",mode:"due",due:5,days:[],groups:["normal"]},
-      {id:"s8",subject:"math",name:"テスト範囲の復習（例）",memo:"",days:[1,2,3,4],groups:["test"]},
-      {id:"s9",subject:"jp",name:"漢字まとめ（例）",memo:"",days:[1,3],groups:["test"]},
-      {id:"s10",subject:"sci",name:"理科 テスト直し（例）",memo:"",days:[2,4],groups:["test"]},
-      {id:"s11",subject:"soc",name:"社会 テスト直し（例）",memo:"",days:[3,5],groups:["test"]},
+      {id:"t1",subject:"math",name:"算数 問題集（例）",memo:"テスト範囲の単元",days:[1,2,3,4],groups:["test"]},
+      {id:"t2",subject:"math",name:"算数 間違えた問題の解き直し（例）",memo:"",days:[5],groups:["test"]},
+      {id:"t3",subject:"jp",name:"漢字の復習（例）",memo:"テスト範囲の回",days:[1,3,5],groups:["test"]},
+      {id:"t4",subject:"jp",name:"国語 問題集（例）",memo:"",days:[2,4],groups:["test"]},
+      {id:"t5",subject:"sci",name:"理科 問題集（例）",memo:"",days:[2,4],groups:["test"]},
+      {id:"t6",subject:"sci",name:"理科 暗記の確認（例）",memo:"",days:[5],groups:["test"]},
+      {id:"t7",subject:"soc",name:"社会 問題集（例）",memo:"",days:[1,3],groups:["test"]},
+      {id:"t8",subject:"soc",name:"社会 暗記の確認（例）",memo:"",days:[5],groups:["test"]},
       {id:"s15",subject:"math",name:"講習テキスト復習（例）",memo:"",days:A,groups:["gwinter"]},
       {id:"s12",subject:"piano",name:"ピアノ練習（例）",memo:"20分",days:WK,groups:[ALWAYS]},
       {id:"s13",subject:"life",name:"朝の歯みがき",memo:"",days:A,groups:[ALWAYS]},
       {id:"s14",subject:"life",name:"夜の歯みがき",memo:"",days:A,groups:[ALWAYS]}
     ],
-    days:{}, weeks:{}
+    days:{}, dues:{}, duesV2:true
   };
 }
 function blankData(){
-  return { childName:"", weekStart:1, lastBackupISO:"", groups:[{id:"normal",name:"通常週",color:"normal",builtin:true},{id:"test",name:"テスト週",color:"test",builtin:true}], weekGroups:{}, tasks:[], days:{}, weeks:{} };
+  return { childName:"", weekStart:1, lastBackupISO:"", groups:[{id:"normal",name:"通常週",color:"normal",builtin:true},{id:"test",name:"テスト週",color:"test",builtin:true}], weekGroups:{}, tasks:[], days:{}, dues:{}, duesV2:true };
 }
 
 /* ---------- date helpers ---------- */
@@ -281,9 +306,20 @@ function normalize(d){
   d.tasks = Array.isArray(d.tasks)?d.tasks:[];
   d.tasks.forEach(t=>{ if(!Array.isArray(t.groups)||!t.groups.length) t.groups=[ALWAYS]; if(!Array.isArray(t.days)) t.days=[]; });
   d.days = d.days||{};
-  d.weeks = d.weeks||{};
   d.tasks.forEach(t=>{ if(t.mode!=="due") t.mode="days"; });
-  d.weekStart = d.weekStart===0?0:1;
+  d.weekStart = [0,1,2,3,4,5,6].includes(d.weekStart) ? d.weekStart : 1;
+  d.dues = d.dues||{};
+  if (!d.duesV2){
+    // 旧形式（週の始まりの日付ごと）→ 新形式（期限の日付ごと）に移す
+    Object.keys(d.weeks||{}).forEach(ws=>{
+      const w=d.weeks[ws]||{};
+      const move=(id)=>{ const t=d.tasks.find(x=>x.id===id&&x.mode==="due"); if(!t) return null; const dd=addDays(ws,((t.due-dow(ws))+7)%7); d.dues[dd]=d.dues[dd]||{done:{},skip:[]}; return dd; };
+      Object.keys(w.done||{}).forEach(id=>{ const dd=move(id); if(dd) d.dues[dd].done[id]=w.done[id]; });
+      (w.skip||[]).forEach(id=>{ const dd=move(id); if(dd && !d.dues[dd].skip.includes(id)) d.dues[dd].skip.push(id); });
+    });
+    d.duesV2=true;
+  }
+  delete d.weeks;
   d.childName = d.childName||"";
   d.lastBackupISO = d.lastBackupISO||"";
   if (!d.startISO){ const ks=Object.keys(d.days).sort(); d.startISO = ks[0] && ks[0]<todayISO() ? ks[0] : todayISO(); }
@@ -294,12 +330,23 @@ function commit(){ persist(); render(); }
 const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
 const isStandalone = window.navigator.standalone===true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
 const onWeb = /^https?:$/.test(location.protocol);
+const isAndroid = /Android/i.test(navigator.userAgent);
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); installEvt=e; if(!ed) render(); });
+window.addEventListener("appinstalled", ()=>{ installEvt=null; if(!ed) render(); });
+const DORDER = ()=>[0,1,2,3,4,5,6].map(i=>(data.weekStart+i)%7);
 function daysSince(isoDate){ return isoDate ? Math.round((parse(todayISO())-parse(isoDate))/86400000) : null; }
 function recordedDays(){ return Object.keys(data.days).filter(k=>Object.values(data.days[k].done||{}).some(Boolean)).length; }
 function needBackup(){ const n=daysSince(data.lastBackupISO); return n===null ? recordedDays()>=7 : n>=14; }
+function homeBanner(first){
+  if (!onWeb || isStandalone) return "";
+  if (isIOS) return `<div class="banner"><div><b>${first?"先に":""}ホーム画面に追加してください。</b><br>Safariのままだと、ホーム画面のアプリと記録が別々になります。共有ボタン →「ホーム画面に追加」。</div></div>`;
+  if (isAndroid) return `<div class="banner"><div style="flex:1"><b>${first?"先に":""}ホーム画面に追加してください。</b><br>Chromeのままだと、ホーム画面のアプリと記録が別々になります。右上の「︙」→「ホーム画面に追加」または「アプリをインストール」。</div>${installEvt?`<button class="btn primary" data-install>追加</button>`:""}</div>`;
+  return "";
+}
 function banners(){
   let h="";
-  if (isIOS && onWeb && !isStandalone) h += `<div class="banner"><div><b>ホーム画面に追加してから使ってください。</b><br>Safariのままだと、ホーム画面のアプリと記録が別々になります。下の共有ボタン →「ホーム画面に追加」。</div></div>`;
+  h += homeBanner();
   if (needBackup()) { const n=daysSince(data.lastBackupISO); h += `<div class="banner"><div style="flex:1"><b>バックアップをおすすめします。</b><br>${n===null?"まだ一度も保存していません。":`前回の保存から${n}日たっています。`}</div><button class="btn primary" data-export>保存</button></div>`; }
   return h;
 }
@@ -320,15 +367,16 @@ function tasksFor(date){
   const active = all.filter(t=>!skip.has(t.id));
   return { active, skipped: base.filter(t=>skip.has(t.id)), done: active.filter(t=>d.done[t.id]), todo: active.filter(t=>!d.done[t.id]) };
 }
-/* 期限つき（曜日は自由・○曜日までにする）課題 */
-function weekRef(ws){ if(!data.weeks[ws]) data.weeks[ws]={done:{},skip:[]}; const w=data.weeks[ws]; w.done=w.done||{}; w.skip=w.skip||[]; return w; }
-function dueDateOf(t,ws){ return addDays(ws,((t.due-data.weekStart)+7)%7); }
+/* 期限つき（曜日は自由・○曜日までにする）課題
+   1回分の期間 ＝ 前の期限の翌日 〜 期限の日。記録は期限の日付ごとに持つ */
+function dueRef(dd){ if(!data.dues[dd]) data.dues[dd]={done:{},skip:[]}; const w=data.dues[dd]; w.done=w.done||{}; w.skip=w.skip||[]; return w; }
+function nextDue(t,date){ return addDays(date,((t.due-dow(date))+7)%7); }
+function dueInst(t,dd){ const r=data.dues[dd]||{}; return Object.assign({},t,{dueDate:dd, ws:dd, doneDate:(r.done||{})[t.id]||"", skipped:(r.skip||[]).includes(t.id)}); }
+function dueApplies(t,dd){ const g=groupOf(dd); return t.groups.includes(ALWAYS)||t.groups.includes(g); }
+/* date 以降で最初に来る期限の回（週の画面では週の初日を渡すと、その週に期限がある回になる） */
 function dueFor(date){
-  const ws = weekStartOf(date,data.weekStart), g = groupOf(ws), wr = data.weeks[ws]||{};
-  const done = wr.done||{}, skip = new Set(wr.skip||[]);
-  const all = sortTasks(data.tasks.filter(t=>t.mode==="due" && (t.groups.includes(ALWAYS)||t.groups.includes(g))))
-    .map(t=>Object.assign({},t,{dueDate:dueDateOf(t,ws), doneDate:done[t.id]||"", ws}));
-  return { all: all.filter(t=>!skip.has(t.id)), skipped: all.filter(t=>skip.has(t.id)), pending: all.filter(t=>!skip.has(t.id)&&!t.doneDate) };
+  const list = sortTasks(data.tasks.filter(t=>t.mode==="due").map(t=>dueInst(t,nextDue(t,date))).filter(t=>dueApplies(t,t.dueDate)));
+  return { all:list.filter(t=>!t.skipped), skipped:list.filter(t=>t.skipped), pending:list.filter(t=>!t.skipped&&!t.doneDate) };
 }
 function dueLabel(t,ref){
   const wd = DOW[dow(t.dueDate)]+"曜";
@@ -377,21 +425,23 @@ function taskRow(t,date,orig){
   </div>${menu}`;
 }
 
-/* 前の日までに終わらなかった課題（最大7日前まで）を「期限切れ」として持ち越す */
+/* 前の日までに終わらなかった課題（最大7日前まで）を「期限切れ」として持ち越す。生活は持ち越さない */
 function carryFor(today){
   const from = [addDays(today,-7), data.startISO].sort()[1];
   const items=[], doneToday=[];
   for (let d=from; d<today; d=addDays(d,1)){
     const T=tasksFor(d), day=getDay(d);
-    T.todo.forEach(t=>items.push(Object.assign({},t,{orig:d})));
+    T.todo.filter(t=>t.subject!=="life").forEach(t=>items.push(Object.assign({},t,{orig:d})));
     T.done.forEach(t=>{ if(day.done[t.id]===today) doneToday.push(Object.assign({},t,{orig:d})); });
   }
-  const pws = addDays(weekStartOf(today,data.weekStart),-7);
-  if (addDays(pws,6) >= data.startISO){
-    const P = dueFor(pws);
-    P.pending.filter(t=>t.dueDate>=data.startISO && t.dueDate<today).forEach(t=>items.push(Object.assign({},t,{orig:t.dueDate})));
-    P.all.filter(t=>t.doneDate===today).forEach(t=>doneToday.push(Object.assign({},t,{orig:t.dueDate})));
-  }
+  data.tasks.filter(t=>t.mode==="due").forEach(t=>{
+    const prev = addDays(nextDue(t,today),-7);
+    if (prev < data.startISO || !dueApplies(t,prev)) return;
+    const x = dueInst(t,prev);
+    if (x.skipped) return;
+    if (!x.doneDate && t.subject!=="life") items.push(Object.assign(x,{orig:prev}));
+    else if (x.doneDate===today) doneToday.push(Object.assign(x,{orig:prev}));
+  });
   items.sort((a,b)=>a.orig<b.orig?-1:a.orig>b.orig?1:0);
   return {items, doneToday};
 }
@@ -431,17 +481,17 @@ function todayHTML(){
   h += `<h2 class="sec">${isToday?"今日":"この日"} <span class="cnt num">${T.todo.length}件</span></h2>`;
   if (!T.todo.length) h += `<div class="empty">${T.active.length?"すべて完了しました。お疲れさま。":"この日の予定はありません"}</div>`;
   else h += byGroup(T.todo);
-  h += `<button class="addbtn" data-addextra>＋ この日だけの課題を追加</button>`;
+  h += `<button class="addbtn" data-addextra>＋ ${isToday?"今日":"この日"}の課題を追加</button>`;
   if (duePend.length){
-    h += `<h2 class="sec">期限まで <span class="cnt num">${duePend.length}件 ・ 今週中、曜日は自由</span></h2>`;
+    h += `<h2 class="sec">期限まで <span class="cnt num">${duePend.length}件</span></h2>`;
     h += byGroup(duePend.slice().sort((a,b)=>a.dueDate<b.dueDate?-1:a.dueDate>b.dueDate?1:0));
   }
 
-  h += `<h2 class="sec">完了したもの <span class="cnt num">${n}件</span></h2>`;
+  h += `<h2 class="sec">完了 <span class="cnt num">${n}件</span></h2>`;
   if (!n) h += `<div class="empty">まだありません</div>`;
   else h += `<div class="donelist">${T.done.map(t=>`<button data-toggle="${t.id}" data-date="${date}" aria-pressed="true"><span class="dot" style="background:${col(t.subject)}">✓</span><span class="nm">${esc(t.name)}</span><span class="undo">戻す</span></button>`).join("")}${dueDone.map(t=>`<button data-toggledue="${t.id}" data-wk="${t.ws}" data-date="${date}" aria-pressed="true"><span class="dot" style="background:${col(t.subject)}">✓</span><span class="nm">${esc(t.name)}</span><span class="undo">戻す</span></button>`).join("")}${C.doneToday.map(t=>t.mode==="due"?`<button data-toggledue="${t.id}" data-wk="${t.ws}" data-date="${date}" aria-pressed="true"><span class="dot" style="background:${col(t.subject)}">✓</span><span class="nm">${esc(t.name)}（${md(t.orig)}の分）</span><span class="undo">戻す</span></button>`:`<button data-toggle="${t.id}" data-date="${t.orig}" aria-pressed="true"><span class="dot" style="background:${col(t.subject)}">✓</span><span class="nm">${esc(t.name)}（${md(t.orig)}の分）</span><span class="undo">戻す</span></button>`).join("")}</div>`;
 
-  if (T.skipped.length || D.skipped.length) h += `<h2 class="sec">しないことにしたもの</h2><div class="skipped">${T.skipped.map(t=>`<button class="chipbtn" data-unskip="${t.id}">${esc(t.name)}　↺ 戻す</button>`).join("")}${D.skipped.map(t=>`<button class="chipbtn" data-unskipweek="${t.id}" data-ws="${t.ws}">${esc(t.name)}（今週）　↺ 戻す</button>`).join("")}</div>`;
+  if (T.skipped.length || D.skipped.length) h += `<h2 class="sec">しない</h2><div class="skipped">${T.skipped.map(t=>`<button class="chipbtn" data-unskip="${t.id}">${esc(t.name)}　↺ 戻す</button>`).join("")}${D.skipped.map(t=>`<button class="chipbtn" data-unskipweek="${t.id}" data-ws="${t.ws}">${esc(t.name)}（今週）　↺ 戻す</button>`).join("")}</div>`;
 
   const we = addDays(weekStartOf(date,data.weekStart),6);
   const rest = []; for (let d=addDays(date,1); d<=we; d=addDays(d,1)) rest.push(d);
@@ -491,7 +541,7 @@ function weekHTML(){
   h += `<h2 class="sec">今週の残り</h2>`;
   if (D.pending.length){
     const doneDay = today>=ws && today<=we ? today : null;
-    h += `<div class="dayblock${D.pending.some(lateDue)?" over":""}"><div class="dh"><span>期限まで（曜日は自由）</span><span class="num">${D.pending.length}件</span></div><ul>${D.pending.slice().sort((a,b)=>a.dueDate<b.dueDate?-1:1).map(t=>`<li style="color:${col(t.subject)}"><button class="minicheck" data-toggledue="${t.id}" data-wk="${ws}" data-date="${doneDay||t.dueDate}" aria-label="${esc(t.name)}を完了にする"></button><span class="tag sm" style="background:${col(t.subject)}">${SUBJ[t.subject].short}</span><span class="nm">${esc(t.name)}${dueLabel(t,today)}</span></li>`).join("")}</ul></div>`;
+    h += `<div class="dayblock${D.pending.some(lateDue)?" over":""}"><div class="dh"><span>期限まで</span><span class="num">${D.pending.length}件</span></div><ul>${D.pending.slice().sort((a,b)=>a.dueDate<b.dueDate?-1:1).map(t=>`<li style="color:${col(t.subject)}"><button class="minicheck" data-toggledue="${t.id}" data-wk="${t.dueDate}" data-date="${doneDay||t.dueDate}" aria-label="${esc(t.name)}を完了にする"></button><span class="tag sm" style="background:${col(t.subject)}">${SUBJ[t.subject].short}</span><span class="nm">${esc(t.name)}${dueLabel(t,today)}</span></li>`).join("")}</ul></div>`;
   }
   const listFor = (p, cls, label) => `<div class="dayblock ${cls}"><div class="dh"><span>${label}</span><span class="num">${p.T.todo.length?`${p.T.todo.length}件`:"完了"}</span></div>${p.T.todo.length ? `<ul>${p.T.todo.map(t=>`<li style="color:${col(t.subject)}"><button class="minicheck" data-toggle="${t.id}" data-date="${p.d}" aria-label="${esc(t.name)}を完了にする"></button><span class="tag sm" style="background:${col(t.subject)}">${SUBJ[t.subject].short}</span><span class="nm">${esc(t.name)}${t.memo?` <span class="memo">${esc(t.memo)}</span>`:""}</span></li>`).join("")}</ul>` : `<div class="allgood">すべて完了</div>`}</div>`;
   per.filter(p=>late(p) && p.T.todo.length).forEach(p=>{ h += listFor(p,"over",`未完了 ・ ${dateTitle(p.d)}`); });
@@ -519,7 +569,7 @@ function weekHTML(){
       if (d!==t.dueDate) { h += `<td>${t.doneDate===d?`<span style="color:${col(t.subject)};font-weight:900">✓</span>`:""}</td>`; return; }
       if (skipped) { h += `<td style="color:var(--ink2);font-size:13px" title="しない">−</td>`; return; }
       const on = !!t.doneDate;
-      h += `<td><button class="cell${on?" on":""}${lateDue(t)?" late":""}" style="color:${col(t.subject)}" data-toggledue="${t.id}" data-wk="${ws}" data-date="${(today>=ws&&today<=we)?today:d}" aria-pressed="${on}" aria-label="${esc(t.name)}（${DOW[t.due]}曜まで）"></button></td>`;
+      h += `<td><button class="cell${on?" on":""}${lateDue(t)?" late":""}" style="color:${col(t.subject)}" data-toggledue="${t.id}" data-wk="${t.dueDate}" data-date="${(today>=ws&&today<=we)?today:d}" aria-pressed="${on}" aria-label="${esc(t.name)}（${DOW[t.due]}曜まで）"></button></td>`;
     });
     h += `</tr>`;
   });
@@ -531,8 +581,13 @@ function weekHTML(){
 function settingsHTML(){
   if (setTab!==ALWAYS && !gById(setTab)) setTab="normal";
   const tabs = [...data.groups.map(g=>({id:g.id,name:g.name,color:gColor(g)})), {id:ALWAYS,name:"毎週共通",color:"var(--ink2)"}];
-  let h = `<header class="top"><div class="date"><h1>設定</h1><div class="sub">課題の登録、スケジュールの切り替え、バックアップ</div></div>
+  let h = `<header class="top"><div class="date"><h1>設定</h1></div>
     <a class="linkrow" href="guide.html">使い方を見る<span aria-hidden="true" style="color:var(--ink2)">›</span></a></header>`;
+  h += `<div class="setcard">
+   <div class="field"><label for="f-child">名前（画面に表示）</label><input type="text" id="f-child" value="${esc(data.childName)}" placeholder="例：たろう" maxlength="20"></div>
+   <div class="field" style="margin:0"><span class="lb">週の始まり</span><div class="pickrow">${[1,2,3,4,5,6,0].map(i=>`<button class="pick dw" data-wstart="${i}" aria-pressed="${data.weekStart===i}">${DOW[i]}</button>`).join("")}</div>
+     <p class="note" style="margin:6px 0 0">毎週の課題やスケジュールは、この曜日から1週間として繰り返します。単元の勉強が終わる日（週テスト）の翌日、もしくは新しい単元の勉強（予習）を始める日にすると便利です。</p></div>
+  </div>`;
 
   h += `<h2 class="sec">課題の登録</h2><div class="seg" role="group" aria-label="スケジュールの種類">${tabs.map(t=>`<button data-settab="${t.id}" aria-pressed="${setTab===t.id}"><span class="sw" style="background:${t.color}"></span>${esc(t.name)}</button>`).join("")}</div>
    <p class="hint">${setTab===ALWAYS?"どのスケジュールの週でも毎回すること（歯みがき、習い事など）です。":`「${esc(gById(setTab).name)}」の週にする課題です。`}</p>`;
@@ -544,7 +599,7 @@ function settingsHTML(){
     L.forEach(t=>{
       const others = t.groups.filter(g=>g!==setTab).map(g=>gById(g)?gById(g).name:null).filter(Boolean);
       h += `<button class="srow" data-edit="${t.id}"><span class="txt"><span class="name">${esc(t.name)}</span>${t.memo?`<span class="memo"> ・ ${esc(t.memo)}</span>`:""}${others.length?`<span class="also">（${others.map(esc).join("・")}でも）</span>`:""}
-        ${t.mode==="due"?`<span class="dows"><span class="due" style="margin-left:0">${DOW[t.due]}曜までに（曜日は自由）</span></span>`:`<span class="dows">${[1,2,3,4,5,6,0].map(i=>`<i class="${t.days.includes(i)?"on":""}" style="${t.days.includes(i)?`background:${col(s)}`:""}">${DOW[i]}</i>`).join("")}</span>`}</span><span aria-hidden="true" style="color:var(--ink2)">›</span></button>`;
+        ${t.mode==="due"?`<span class="dows"><span class="due" style="margin-left:0">${DOW[t.due]}曜までに（曜日は自由）</span></span>`:`<span class="dows">${DORDER().map(i=>`<i class="${t.days.includes(i)?"on":""}" style="${t.days.includes(i)?`background:${col(s)}`:""}">${DOW[i]}</i>`).join("")}</span>`}</span><span aria-hidden="true" style="color:var(--ink2)">›</span></button>`;
     });
     h += `</div>`;
   });
@@ -563,12 +618,11 @@ function settingsHTML(){
   // week assignment
   const nowWs = weekStartOf(todayISO(), data.weekStart);
   h += `<h2 class="sec">週ごとのスケジュール</h2>
-  <div class="card"><div class="field" style="margin-bottom:10px"><span class="lb">期間でまとめて設定（長期休みなど）</span></div>
-    <div class="frow"><div class="field"><label for="r-from">開始日</label><input type="date" id="r-from"></div>
-    <div class="field"><label for="r-to">終了日</label><input type="date" id="r-to"></div></div>
-    <div class="field"><label for="r-group">スケジュール</label><select id="r-group">${data.groups.map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join("")}</select></div>
+  <div class="card"><div class="field" style="margin-bottom:8px"><span class="lb">期間でまとめて設定（長期休みなど）</span><span class="note" style="margin:0">開始日と終了日をカレンダーでタップして選びます。</span></div>
+    ${calHTML()}
+    <div class="field"><label for="r-group">スケジュール</label><select id="r-group">${data.groups.map(g=>`<option value="${g.id}" ${cal.g===g.id?"selected":""}>${esc(g.name)}</option>`).join("")}</select></div>
     <button class="btn primary" data-applyrange>この期間に設定する</button>
-    <p class="note">開始日と終了日を含む週がすべて切り替わります。</p></div>
+    <p class="note">選んだ期間を含む週がすべて切り替わります。カレンダーの点は、今の設定（通常週以外）です。</p></div>
   <p class="hint">1週ずつ変える場合はこちら。何も設定しない週は「通常週」になります。</p><div class="card weeklist">`;
   for (let i=-2;i<weeksShown;i++){
     const ws = addDays(nowWs,i*7);
@@ -576,13 +630,7 @@ function settingsHTML(){
   }
   h += `</div><button class="addbtn" data-moreweeks>さらに先の週を表示</button>`;
 
-  // other
-  h += `<h2 class="sec">その他</h2>
-   <div class="field"><label for="f-child">名前（画面に表示）</label><input type="text" id="f-child" value="${esc(data.childName)}" placeholder="例：たろう" maxlength="20"></div>
-   <div class="field"><span class="lb">週の始まり</span><div class="pickrow">
-     <button class="pick wn" data-ws="1" aria-pressed="${data.weekStart===1}">月曜日</button>
-     <button class="pick wn" data-ws="0" aria-pressed="${data.weekStart===0}">日曜日</button></div></div>
-
+  h += `
   <h2 class="sec">バックアップ</h2>
    <div class="card">
     <p style="margin:0 0 8px">記録はこのブラウザの中だけに保存されています。ブラウザの履歴やデータを消すと記録も消えるので、ときどきバックアップを保存してください。別のパソコンやスマホに移すときも、このファイルを使います。</p>
@@ -594,12 +642,29 @@ function settingsHTML(){
   return h;
 }
 
+let cal = {m:todayISO().slice(0,8)+"01", a:null, b:null, g:"test"};
+function calHTML(){
+  const first=parse(cal.m), y=first.getFullYear(), mo=first.getMonth();
+  const lastDay = iso(new Date(y,mo+1,0));
+  const start = weekStartOf(cal.m,data.weekStart), end = addDays(weekStartOf(lastDay,data.weekStart),6);
+  const today = todayISO(), a = cal.a, z = cal.b||cal.a;
+  let cells = DORDER().map(i=>`<span class="cw">${DOW[i]}</span>`).join("");
+  for (let d=start; d<=end; d=addDays(d,1)){
+    const inM = parse(d).getMonth()===mo, sel = a && d>=a && d<=z, edge = d===cal.a || d===cal.b;
+    const g = groupOf(d), gc = g!=="normal" ? gColor(gById(g)) : "";
+    cells += `<button type="button" class="cd${inM?"":" out"}${sel?" sel":""}${edge?" edge":""}${d===today?" today":""}" data-cal="${d}" aria-pressed="${!!sel}" aria-label="${dateTitle(d)}">${parse(d).getDate()}${gc?`<i style="background:${gc}"></i>`:""}</button>`;
+  }
+  const lbl = cal.a ? `${md(cal.a)}（${DOW[dow(cal.a)]}）〜 ${cal.b?`${md(cal.b)}（${DOW[dow(cal.b)]}）`:"終了日をタップ"}` : "開始日をタップしてください";
+  return `<div class="cal"><div class="calh"><button type="button" class="navbtn sm" data-calm="-1" aria-label="前の月">‹</button><b class="num">${y}年${mo+1}月</b><button type="button" class="navbtn sm" data-calm="1" aria-label="次の月">›</button></div>
+    <div class="calg">${cells}</div><p class="calsel">${lbl}</p></div>`;
+}
+
 function setupHTML(){
   return `<div class="setup"><h2>宿題手帳</h2>
    <p>塾の宿題と、歯みがき・ピアノなど毎日のことを登録すると、曜日と週のスケジュール（通常週・テスト週・講習など）に合わせて「今日」やることを表示します。</p>
    <div class="btns"><button class="btn primary grow1" data-seed="sample">例を入れて始める</button><button class="btn grow1" data-seed="blank">空の状態で始める</button><button class="btn grow1" data-import>バックアップから復元</button></div>
    <p class="note">例の課題には「（例）」と付いています。設定画面で実際の教材名と曜日に書き換えてください。</p>
-   <p class="note"><a href="guide.html" style="color:inherit;font-weight:700">使い方を見る ›</a></p>${isIOS && onWeb && !isStandalone ? `<div class="banner"><div><b>先にホーム画面に追加してください。</b><br>Safariの共有ボタン →「ホーム画面に追加」。追加したアイコンから開いて始めます。</div></div>`:""}</div>`;
+   <p class="note"><a href="guide.html" style="color:inherit;font-weight:700">使い方を見る ›</a></p>${homeBanner(true)}</div>`;
 }
 
 /* ---------- modal: task & group editor ---------- */
@@ -623,8 +688,9 @@ function renderEd(){
   } else {
     const isExtra = ed.kind==="extra";
     const gOpts = [...data.groups.map(g=>({id:g.id,name:g.name,color:gColor(g)})), {id:ALWAYS,name:"毎週共通",color:"var(--ink2)"}];
-    body = `<h3 id="ed-t">${isExtra?`${dateTitle(cur)} だけの課題`:ed.id?"課題を編集":"課題を追加"}</h3>
-      <div class="field"><span class="lb">科目</span><div class="pickrow">${ORDER.map(s=>`<button type="button" class="pick" data-subj="${s}" aria-pressed="${ed.subject===s}" style="color:${col(s)};${ed.subject===s?`background:${tint(s)}`:""}"><span class="tag sm" style="background:${col(s)}">${SUBJ[s].short}</span><span style="color:var(--ink)">${SUBJ[s].name}</span></button>`).join("")}</div></div>
+    body = `<h3 id="ed-t">${isExtra?(cur===todayISO()?"今日の課題を追加":`${dateTitle(cur)}の課題を追加`):ed.id?"課題を編集":"課題を追加"}</h3>
+      ${isExtra?`<p class="note" style="margin:-6px 0 14px">この日だけの課題です。ほかの日や、登録済みの課題には影響しません。</p>`:""}
+      <div class="field"><span class="lb">科目</span><div class="pickrow">${ORDER.map(s=>`<button type="button" class="pick" data-subj="${s}" aria-pressed="${ed.subject===s}" style="color:${col(s)};${ed.subject===s?`background:${tint(s)}`:""}"><span class="tag sm" style="background:${col(s)}">${SUBJ[s].short}</span><span style="color:var(--ink)">${SUBJ[s].name}</span></button>`).join("")}</div>${ed.subject==="life"?`<p class="note" style="margin:2px 0 0">生活の課題は、終わらなかったときも次の日に「期限切れ」として持ち越しません。</p>`:""}</div>
       <div class="field"><label for="e-name">教材名・内容</label><input type="text" id="e-name" value="${esc(ed.name)}" placeholder="例：基礎トレ、漢字の要" maxlength="40"></div>
       <div class="field"><label for="e-memo">メモ（範囲・回数など。空欄でも可）</label><input type="text" id="e-memo" value="${esc(ed.memo)}" placeholder="例：1日1ページ" maxlength="40"></div>
       ${isExtra?"":`
@@ -632,8 +698,8 @@ function renderEd(){
         <button type="button" class="pick wn" data-emode="days" aria-pressed="${ed.mode!=="due"}">曜日を決める</button>
         <button type="button" class="pick wn" data-emode="due" aria-pressed="${ed.mode==="due"}">期限を決める</button></div></div>
       ${ed.mode==="due"
-        ? `<div class="field"><span class="lb">期限（この曜日までにする）</span><div class="pickrow">${[1,2,3,4,5,6,0].map(i=>`<button type="button" class="pick dw" data-due="${i}" aria-pressed="${ed.due===i}">${DOW[i]}</button>`).join("")}</div><p class="note" style="margin:0">週の初めから期限の日まで毎日「期限まで」に表示され、完了すると今週は表示されなくなります。</p></div>`
-        : `<div class="field"><span class="lb">する日を選択</span><div class="pickrow">${[1,2,3,4,5,6,0].map(i=>`<button type="button" class="pick dw" data-dw="${i}" aria-pressed="${ed.days.includes(i)}">${DOW[i]}</button>`).join("")}</div></div>`}
+        ? `<div class="field"><span class="lb">期限（この曜日までにする）</span><div class="pickrow">${DORDER().map(i=>`<button type="button" class="pick dw" data-due="${i}" aria-pressed="${ed.due===i}">${DOW[i]}</button>`).join("")}</div><p class="note" style="margin:0">前の期限の翌日から次の期限の日まで、毎日「期限まで」に表示されます。完了すると、次の回まで表示されません。</p></div>`
+        : `<div class="field"><span class="lb">する日を選択</span><div class="pickrow">${DORDER().map(i=>`<button type="button" class="pick dw" data-dw="${i}" aria-pressed="${ed.days.includes(i)}">${DOW[i]}</button>`).join("")}</div></div>`}
       <div class="field"><span class="lb">どのスケジュールの週にする？（複数選択可）</span><div class="pickrow">${gOpts.map(g=>`<button type="button" class="pick wn" data-eg="${g.id}" aria-pressed="${ed.groups.includes(g.id)}"><span class="tag sm" style="background:${g.color};width:10px;height:10px"></span>${esc(g.name)}</button>`).join("")}</div></div>`}
       <div class="btns"><button type="submit" class="btn primary grow1">保存</button><button type="button" class="btn" data-cancel>キャンセル</button></div>
       ${ed.id && !isExtra ? `<div class="btns"><button type="button" class="btn danger" data-deltask>${ed.confirmDel?"本当に削除する":"この課題を削除"}</button></div>`:""}`;
@@ -701,9 +767,9 @@ function onClick(e){
   if (d.view){ view=d.view; openMore=null; try{localStorage.setItem(KEY+"-view",view);}catch(_){}; render(); window.scrollTo(0,0); return; }
   if (d.toggle){ const date=d.date||cur, today=todayISO(); const r=dayRef(date); r.done[d.toggle] = r.done[d.toggle] ? false : (date<=today ? today : date); commit(); return; }
   if (d.more){ openMore = openMore===d.more?null:d.more; render(); return; }
-  if (d.toggledue){ const w=weekRef(d.wk); if (w.done[d.toggledue]) delete w.done[d.toggledue]; else w.done[d.toggledue]=d.date||todayISO(); commit(); return; }
-  if (d.skipweek){ openMore=null; const w=weekRef(d.ws); if(!w.skip.includes(d.skipweek)) w.skip.push(d.skipweek); commit(); toast("今週はしないことにしました"); return; }
-  if (d.unskipweek){ const w=weekRef(d.ws); w.skip=w.skip.filter(x=>x!==d.unskipweek); commit(); return; }
+  if (d.toggledue){ const w=dueRef(d.wk); if (w.done[d.toggledue]) delete w.done[d.toggledue]; else w.done[d.toggledue]=d.date||todayISO(); commit(); return; }
+  if (d.skipweek){ openMore=null; const w=dueRef(d.ws); if(!w.skip.includes(d.skipweek)) w.skip.push(d.skipweek); commit(); toast("今週はしないことにしました"); return; }
+  if (d.unskipweek){ const w=dueRef(d.ws); w.skip=w.skip.filter(x=>x!==d.unskipweek); commit(); return; }
   if (d.skip){ openMore=null; const r=dayRef(d.sdate||cur); if(!r.skip.includes(d.skip)) r.skip.push(d.skip); commit(); toast("しないことにしました"); return; }
   if (d.unskip){ const r=dayRef(cur); r.skip=r.skip.filter(x=>x!==d.unskip); commit(); return; }
   if (d.delextra){ openMore=null; const r=dayRef(d.sdate||cur); r.extra=r.extra.filter(x=>x.id!==d.delextra); commit(); return; }
@@ -717,14 +783,18 @@ function onClick(e){
   if (d.newgroup!==undefined){ openEd({kind:"group",name:"",color:String(data.groups.filter(g=>!g.builtin).length%5),copyFrom:""}); return; }
   if (d.editgroup){ const g=gById(d.editgroup); openEd({kind:"group",id:g.id,name:g.name,color:g.color}); return; }
   if (d.moreweeks!==undefined){ weeksShown+=12; render(); return; }
+  if (d.calm){ const f=parse(cal.m); cal.m=iso(new Date(f.getFullYear(),f.getMonth()+(+d.calm),1)); render(); return; }
+  if (d.cal){ const x=d.cal; if(!cal.a || cal.b){ cal.a=x; cal.b=null; } else if (x<cal.a){ cal.a=x; } else { cal.b=x; } render(); return; }
+  if (d.install!==undefined){ if(installEvt){ installEvt.prompt(); installEvt.userChoice.finally(()=>{ installEvt=null; render(); }); } return; }
   if (d.applyrange!==undefined){
-    const f=document.getElementById("r-from").value, t=document.getElementById("r-to").value, g=document.getElementById("r-group").value;
-    if(!f||!t){ toast("開始日と終了日を入れてください"); return; }
-    const a = f<=t?f:t, z = f<=t?t:f; let n=0;
+    const g=document.getElementById("r-group").value;
+    if(!cal.a){ toast("カレンダーで開始日をタップしてください"); return; }
+    const a = cal.a, z = cal.b||cal.a; let n=0;
     for (let ws=weekStartOf(a,data.weekStart); ws<=z; ws=addDays(ws,7)){ if(g==="normal") delete data.weekGroups[ws]; else data.weekGroups[ws]=g; n++; }
+    cal.a=null; cal.b=null; cal.g=g;
     commit(); toast(`${n}週を「${gById(g).name}」にしました`); return;
   }
-  if (d.ws){ const nw=+d.ws; if(nw!==data.weekStart){ const m={}; Object.keys(data.weekGroups).forEach(k=>{ m[weekStartOf(addDays(k,3),nw)]=data.weekGroups[k]; }); data.weekGroups=m; data.weekStart=nw; commit(); } return; }
+  if (d.wstart!==undefined){ const nw=+d.wstart; if(nw!==data.weekStart){ const m={}; Object.keys(data.weekGroups).forEach(k=>{ m[weekStartOf(addDays(k,3),nw)]=data.weekGroups[k]; }); data.weekGroups=m; data.weekStart=nw; commit(); } return; }
   if (d.seed){ data = d.seed==="sample"?sampleData():blankData(); data.startISO=todayISO(); if(d.seed==="blank") view="settings"; commit(); return; }
   if (d.export!==undefined){ exportData(); return; }
   if (d.import!==undefined){ document.getElementById("importFile").click(); return; }
@@ -738,6 +808,7 @@ document.getElementById("tabs").addEventListener("click", onClick);
 main.addEventListener("change", e=>{
   const t = e.target;
   if (t.id==="f-child"){ data.childName=t.value.trim(); commit(); }
+  else if (t.id==="r-group"){ cal.g=t.value; }
   else if (t.dataset.weekgroup){ const ws=t.dataset.weekgroup; if(t.value==="normal") delete data.weekGroups[ws]; else data.weekGroups[ws]=t.value; t.blur(); commit(); }
 });
 

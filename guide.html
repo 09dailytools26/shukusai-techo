@@ -67,148 +67,50 @@ footer{margin-top:40px;color:var(--ink2);font-size:13px}
 
   <header class="hero">
     <img src="icon-180.png" alt="">
-    <div><h1>宿題手帳の使い方</h1><p class="lead">塾の宿題と、毎日の歯みがき・ピアノを曜日ごとに管理するアプリです。</p></div>
+    <div><h1>宿題手帳の使い方</h1><p class="lead">塾の宿題と毎日のことを、曜日ごとに管理するアプリです。</p></div>
   </header>
 
-  <nav class="toc" aria-label="目次"><b>目次</b><ol>
-    <li><a href="#setup">公開する（最初の1回だけ・パソコンで）</a></li>
-    <li><a href="#iphone">iPhoneのホーム画面に入れる</a></li>
-    <li><a href="#first">課題を登録する</a></li>
-    <li><a href="#schedule">テスト週・講習・長期休みの設定</a></li>
-    <li><a href="#daily">毎日の使い方（今日の画面）</a></li>
-    <li><a href="#week">今週の画面</a></li>
-    <li><a href="#backup">バックアップと機種変更</a></li>
-    <li><a href="#update">アプリを新しくするとき</a></li>
-    <li><a href="#faq">よくある質問</a></li>
-  </ol></nav>
-
-  <h2 id="setup"><span class="no">1</span>公開する（最初の1回だけ・パソコンで）</h2>
-  <p>iPhoneでアプリとして使うために、GitHub Pages（ギットハブ ページズ・無料）にアプリのファイルを置きます。パソコンで行ってください。</p>
-  <ol class="steps">
-    <li>受け取った <b>shukudai-techo.zip</b> をダブルクリックして展開します。<small>中に index.html、guide.html、sw.js、manifest.webmanifest、アイコン画像3つの、合わせて7つのファイルが入っています。</small></li>
-    <li>GitHubにログインし、右上の <span class="ui">＋</span> →「New repository」を選びます。</li>
-    <li>Repository name に <b>shukudai-techo</b> と入れ、<b>Public</b> を選んで「Create repository」を押します。<small>無料プランでPagesを使うにはPublic（公開）にする必要があります。公開されるのは空のアプリだけです。</small></li>
-    <li>できたリポジトリの画面で「uploading an existing file」（または「Add file」→「Upload files」）を押します。</li>
-    <li>展開したフォルダを開き、<b>中の7つのファイルをすべて選んで</b>画面にドラッグし、「Commit changes」を押します。<small>フォルダごとドラッグすると、アドレスが変わってしまうので注意してください。</small></li>
-    <li>リポジトリの「Settings」→ 左の「Pages」を開きます。「Build and deployment」で「Deploy from a branch」を選び、ブランチを <b>main</b>、フォルダを <b>/ (root)</b> にして「Save」を押します。</li>
-    <li>1〜数分待って Pages の画面を再読み込みすると、上に <span class="url">https://ユーザー名.github.io/shukudai-techo/</span> のアドレスが出ます。これがアプリのアドレスです。<small>自分あてにメールやLINEで送っておくと、iPhoneで開くときに便利です。</small></li>
-  </ol>
-  <div class="box">公開されるのは空のアプリだけです。お子さんの名前や宿題の記録はiPhoneの中に保存され、インターネット上には送られません。</div>
-
-  <h2 id="iphone"><span class="no">2</span>iPhoneのホーム画面に入れる</h2>
-  <ol class="steps">
-    <li>iPhoneの <b>Safari</b> で、手順1のアドレスを開きます。</li>
-    <li>画面下の共有ボタン <svg class="share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="共有ボタン"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M6 11H5v10h14V11h-1"/></svg> を押します。<small>ボタンが見えないときは、アドレス欄の横の「…」から共有を選びます。</small></li>
-    <li>一覧から <span class="ui">ホーム画面に追加</span> を選びます。<small>「Webアプリとして開く」という項目があればオンにします。</small></li>
-    <li>右上の <span class="ui">追加</span> を押すと、ホーム画面に宿題手帳のアイコンができます。</li>
-    <li>Safariを閉じて、<b>ホーム画面のアイコンから</b>開きます。</li>
-  </ol>
-  <div class="warnbox"><b>Safariの画面のまま使い始めないでください。</b><br>iPhoneでは、Safariで開いた宿題手帳とホーム画面のアイコンの宿題手帳は、記録が別々に保存されます。必ずアイコンから開いて使ってください。</div>
-
-  <h2 id="first"><span class="no">3</span>課題を登録する</h2>
-  <p>初めて開くと、次の3つから選ぶ画面が出ます。</p>
+  <h2 id="home"><span class="no">1</span>ホーム画面に追加する</h2>
   <table class="t">
-    <tr><th>例を入れて始める</th><td>「（例）」と付いた課題が入った状態で始まります。例を書き換えながら登録したいときに便利です。</td></tr>
-    <tr><th>空の状態で始める</th><td>何も入っていない状態で、設定画面が開きます。</td></tr>
-    <tr><th>バックアップから復元</th><td>前に保存したバックアップファイルを読み込みます（機種変更のときなど）。</td></tr>
+    <tr><th>iPhone</th><td>Safariで開き、共有ボタン <svg class="share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="共有ボタン"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M6 11H5v10h14V11h-1"/></svg> →「ホーム画面に追加」。</td></tr>
+    <tr><th>Android</th><td>Chromeで開き、右上の「︙」→「ホーム画面に追加」または「アプリをインストール」。</td></tr>
+  </table>
+  <div class="warnbox"><b>必ずホーム画面のアイコンから開いてください。</b><br>ブラウザで開いたときとは、記録が別々になります。</div>
+
+  <h2 id="setup"><span class="no">2</span>最初の設定</h2>
+  <ol class="steps">
+    <li><span class="ui">設定</span> の一番上で <b>週の始まり</b> を選びます。<small>週テストの翌日や、新しい単元を始める日にすると便利です。</small></li>
+    <li>「課題の登録」で <span class="ui">＋ 課題を追加</span> を押し、科目・教材名・する日を入れます。<small>通常週、テスト週、毎週共通（歯みがき、習い事など）に分けて登録します。</small></li>
+    <li>テスト週や講習の週は、「週ごとのスケジュール」のカレンダーで期間を選んで切り替えます。</li>
+  </ol>
+  <table class="t">
+    <tr><th>曜日を決める</th><td>選んだ曜日の「今日」に出ます。</td></tr>
+    <tr><th>期限を決める</th><td>「○曜日までに」終わらせる課題です。次の期限まで毎日「期限まで」に出ます。</td></tr>
   </table>
 
-  <h3>課題を追加する</h3>
-  <ol class="steps">
-    <li>下のタブの <span class="ui">設定</span> を開きます。</li>
-    <li>「課題の登録」の上にあるボタンで、登録先を選びます。<small><span class="ui">通常週</span> <span class="ui">テスト週</span> <span class="ui">毎週共通</span> など。歯みがきやピアノのように、どの週でも毎回することは「毎週共通」に入れます。</small></li>
-    <li><span class="ui">＋ 課題を追加</span> を押し、科目、教材名、メモ（範囲や回数）を入れ、「する日の決め方」を選んで <span class="ui">保存</span> します。<small>最初はどの曜日も選ばれていない状態です。</small></li>
-  </ol>
-  <h3>する日の決め方</h3>
+  <h2 id="daily"><span class="no">3</span>毎日の使い方</h2>
   <table class="t">
-    <tr><th>曜日を決める</th><td>「する日を選択」で、その課題をする曜日を選びます（複数可）。選んだ曜日の「今日」に出ます。</td></tr>
-    <tr><th>期限を決める</th><td>何曜日にするかは決めず、「○曜日までに終わらせる」課題に使います。期限の曜日を1つ選ぶと、週の初めから毎日「期限まで」に表示され、完了すると今週は出なくなります。期限の日は「今日まで」、過ぎると「期限切れ」と表示されます。</td></tr>
+    <tr><th>期限切れ</th><td>前の日までに終わらなかった課題です（生活は除く）。一番上に出ます。</td></tr>
+    <tr><th>今日</th><td>今日する課題です。四角を押すと完了になります。</td></tr>
+    <tr><th>期限まで</th><td>期限を決めた課題です。</td></tr>
+    <tr><th>完了</th><td>終わった課題です。「戻す」で取り消せます。</td></tr>
+    <tr><th>しない</th><td>「⋯」→「この日はしない」「今週はしない」を選んだ課題です。「戻す」で元に戻せます。</td></tr>
   </table>
-  <p>科目の色は塾のテキストに合わせています。</p>
-  <div class="subjects">
-    <span><i style="background:var(--c-math)">算</i>算数</span>
-    <span><i style="background:var(--c-jp)">国</i>国語</span>
-    <span><i style="background:var(--c-sci)">理</i>理科</span>
-    <span><i style="background:var(--c-soc)">社</i>社会</span>
-    <span><i style="background:#7b55c9">習</i>習い事</span>
-    <span><i style="background:#15939e">生</i>生活</span>
-  </div>
-  <p>登録した課題を押すと、内容の変更や削除ができます。同じ課題を「通常週」と「冬期講習」の両方でする場合は、編集画面で両方を選んでください。</p>
+  <p>いつもと違う課題がある日は <span class="ui">＋ 今日の課題を追加</span> で追加します。その日だけの課題なので、ほかの日には影響しません。</p>
 
-  <h2 id="schedule"><span class="no">4</span>テスト週・講習・長期休みの設定</h2>
-  <p>週ごとに「どのスケジュールの週か」を決めると、その週の課題に切り替わります。何も設定していない週は <b>通常週</b> です。</p>
+  <h2 id="week"><span class="no">4</span>今週の画面</h2>
+  <p>今週の残りと、1週間の記録の表が見られます。■が完了、点線の□がやり残し、「−」はしないことにした日です。</p>
 
-  <h3>スケジュールの種類を増やす</h3>
-  <ol class="steps">
-    <li>設定の「スケジュールの種類」で <span class="ui">＋ スケジュールの種類を追加</span> を押します。</li>
-    <li>名前（例：夏期講習、冬休み、イレギュラー週）と色を選びます。</li>
-    <li>「課題を引き継ぐ」で通常週などを選ぶと、その課題も入った状態で作られます。あとから増やしたり消したりできます。</li>
-  </ol>
+  <h2 id="backup"><span class="no">5</span>バックアップ</h2>
+  <p>記録はスマホの中だけに保存されます。<span class="ui">設定</span> →「バックアップを保存」で、ときどき保存してください。機種変更のときは、新しいスマホで「バックアップから復元」を選びます。</p>
 
-  <h3>週を切り替える</h3>
-  <table class="t">
-    <tr><th>長期休み</th><td>設定の「期間でまとめて設定」で、開始日・終了日・スケジュールを選び <span class="ui">この期間に設定する</span> を押します。その期間を含む週がまとめて切り替わります。</td></tr>
-    <tr><th>テスト週など</th><td>設定の週の一覧で、その週の右側から選びます。</td></tr>
-    <tr><th>今週だけ</th><td><span class="ui">今週</span> 画面の「この週のスケジュール」からも変えられます。</td></tr>
-  </table>
-
-  <h2 id="daily"><span class="no">5</span>毎日の使い方（今日の画面）</h2>
-  <table class="t">
-    <tr><th>今日</th><td>まだ終わっていない課題が科目ごとに並びます。その下に、期限を決めた課題が「期限まで」として並びます。四角を押すと完了になり、「完了したもの」に移ります。</td></tr>
-    <tr><th>完了したもの</th><td>終わった課題の一覧です。間違えて押したときは <span class="ui">戻す</span> を押します。</td></tr>
-    <tr><th>今週の残り</th><td>明日から週末までに残っている課題です。</td></tr>
-    <tr><th>日付の移動</th><td>上の ‹ › で前後の日を見られます。<span class="ui">今日へ</span> で今日に戻ります。</td></tr>
-  </table>
-  <h3>いつもと違う日</h3>
-  <p>課題の右の <span class="ui">⋯</span> から <span class="ui">この日はしない</span> を選ぶと、その日だけ一覧から外れます。期限を決めた課題は <span class="ui">今週はしない</span> になります。もう一度 <span class="ui">⋯</span> を押すとメニューが閉じます。しないことにしたものは、下の「しないことにしたもの」から戻せます。</p>
-  <h3>終わらなかった課題</h3>
-  <p>前の日までに終わらなかった課題は、次の日の今日の画面の一番上に「期限切れ」として表示されます（7日前の分まで）。終わったら四角を押して完了にします。やらないことにした場合は <span class="ui">⋯</span> →「しない」を選ぶと表示されなくなります。先週の「期限まで」の課題が終わっていない場合も、ここに表示されます。</p>
-  <p>全部終わると「完了」のはんこが出ます。</p>
-
-  <h2 id="week"><span class="no">6</span>今週の画面</h2>
-  <p>下のタブの <span class="ui">今週</span> で、1週間の進み具合を確認できます。</p>
-  <table class="t">
-    <tr><th>今週の残り</th><td>今日から週末まで、日ごとに残っている課題を表示します。期限を決めた課題は一番上にまとめて出ます。左の四角で完了にできます。</td></tr>
-    <tr><th>未完了</th><td>過ぎた日にやり残した課題が、オレンジで上に出ます。</td></tr>
-    <tr><th>1週間の記録</th><td>課題と曜日の表です。■が完了、点線の□がやり残し、「−」はしないことにした日です。横にスクロールできます。</td></tr>
-  </table>
-
-  <h2 id="backup"><span class="no">7</span>バックアップと機種変更</h2>
-  <p>記録はiPhoneの中だけに保存されます。万一に備えて、ときどきバックアップを保存してください。前回から2週間たつと、今日の画面にお知らせが出ます。</p>
-  <h3>保存する</h3>
-  <ol class="steps">
-    <li><span class="ui">設定</span> →「バックアップ」の <span class="ui">バックアップを保存</span> を押します。</li>
-    <li>共有の画面で <span class="ui">"ファイル"に保存</span> を選び、iCloud Drive などに保存します。<small>自分あてにメールで送っておく方法もあります。</small></li>
-  </ol>
-  <h3>元に戻す・新しいiPhoneに移す</h3>
-  <ol class="steps">
-    <li>新しいiPhoneでも手順2と同じようにホーム画面に追加し、アイコンから開きます。</li>
-    <li><span class="ui">バックアップから復元</span> を押し、保存したファイルを選びます。</li>
-  </ol>
-  <div class="warnbox"><b>復元すると、そのiPhoneに今ある記録はバックアップの内容に置き換わります。</b></div>
-
-  <h2 id="update"><span class="no">8</span>アプリを新しくするとき</h2>
-  <p>アプリの修正版を受け取ったときは、GitHubの shukudai-techo リポジトリを開き、「Add file」→「Upload files」で新しいファイルをドラッグして「Commit changes」を押します。同じ名前のファイルは上書きされます。数分で反映され、アドレスは変わりません。iPhoneの記録もそのまま残ります。</p>
-  <p>iPhoneに新しい版が出るのは、アプリを開き直したときです。変わっていなければ、アプリを一度閉じてから開き直してください。</p>
-
-  <h2 id="faq"><span class="no">9</span>よくある質問</h2>
+  <h2 id="faq"><span class="no">6</span>よくある質問</h2>
   <dl class="faq">
-    <dt>過去のデータは定期的に消えますか？</dt>
-    <dd>アプリが自動で消すことはありません。1日分の記録はとても小さいので、何年分でも保存できます。ただし、次のような場合は消えることがあります。</dd>
-    <dd>・ホーム画面の宿題手帳のアイコンを削除したとき<br>・iPhoneの「設定」→「アプリ」→「Safari」で「履歴とWebサイトデータを消去」をしたとき<br>・iPhoneを初期化したとき</dd>
-    <dd>どれもバックアップがあれば元に戻せます。</dd>
-    <dt>電波がないところでも使えますか？</dt>
-    <dd>一度アイコンから開いたあとは、電波がなくても使えます。</dd>
-    <dt>パソコンやほかのスマホと記録を共有できますか？</dt>
-    <dd>自動では共有されません。端末ごとに記録が別になります。移したいときはバックアップのファイルを使ってください。</dd>
-    <dt>アドレスを知られたら、記録を見られますか？</dt>
-    <dd>見られません。アドレスで開けるのは空のアプリだけで、記録はそれぞれのiPhoneの中にあります。</dd>
-    <dt>週の始まりを日曜日にしたい</dt>
-    <dd><span class="ui">設定</span> →「その他」の「週の始まり」で変えられます。</dd>
-    <dt>例の課題をまとめて消したい</dt>
-    <dd>1つずつ削除するか、<span class="ui">すべてのデータを消す</span> を押して「空の状態で始める」を選び直してください。</dd>
+    <dt>記録は自動で消えますか？</dt>
+    <dd>消えません。ただし、ホーム画面のアイコンを削除したときや、ブラウザのデータを消去したときは消えることがあります。バックアップがあれば戻せます。</dd>
+    <dt>電波がなくても使えますか？</dt>
+    <dd>一度開いたあとは使えます。</dd>
   </dl>
-
   <footer>宿題手帳</footer>
 </div>
 </body>
